@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_alarm_clock"
+        android:title="@string/signal"
+        android:icon="@drawable/ic_alarm"/>
+    <item
+        android:id="@+id/menu_world_clock"
+        android:title="@string/soat"
+        android:icon="@drawable/ic_clock"/>
+    <item
+        android:id="@+id/menu_timer"
+        android:title="@string/taymer"
+        android:icon="@drawable/ic_hourglass"/>
+    <item
+        android:id="@+id/menu_sekundomer"
+        android:title="@string/sekundomer"
+        android:icon="@drawable/ic_secundomer"/>
+    <item
+        android:id="@+id/menu_sleep"
+        android:title="@string/uyqu_vaqti"
+        android:icon="@drawable/ic_bed"/>
+</menu>

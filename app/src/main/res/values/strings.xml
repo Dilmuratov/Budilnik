@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name" translatable="false">Будильник</string>
+    <string name="signal">Signal</string>
+    <string name="soat">Soat</string>
+    <string name="taymer">Taymer</string>
+    <string name="sekundomer">Sekundomer</string>
+    <string name="uyqu_vaqti">Uyqu vaqti</string>
+    <string name="yorliq_kiritish">Yorliq kiritish</string>
+    <string name="monday">D</string>
+    <string name="tuesday">S</string>
+    <string name="thursday">C</string>
+    <string name="wednesday">P</string>
+    <string name="friday">J</string>
+    <string name="saturday">S</string>
+    <string name="sunday">Y</string>
+    <string name="izoh">Izoh</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+</resources>

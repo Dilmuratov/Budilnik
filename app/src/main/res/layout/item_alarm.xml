@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:backgroundTint="@color/bg_alarm_item"
+    android:padding="16dp"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/expandable_layout_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:paddingTop="16dp"
+            app:el_expanded="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="16dp"
+                android:textColor="@color/text_color_selector"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_label" />
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+        <ImageView
+            android:id="@+id/iv_show_hide"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:rotation="180"
+            android:src="@drawable/ic_show"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="22:30"
+            android:textSize="48sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/expandable_layout_1" />
+
+        <TextView
+            android:id="@+id/tv_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingBottom="16dp"
+            android:text=""
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/tv_time"
+            app:layout_constraintTop_toBottomOf="@id/tv_time" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switch_on_off"
+            style="@style/TextAppearance.AppCompat.Widget.Switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_days"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_days"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/expandable_layout_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_expanded="false"
+            app:layout_constraintTop_toBottomOf="@id/switch_on_off">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_week_days"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_monday"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_week_days"
+                        android:gravity="center"
+                        android:text="@string/monday"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1"
+                        app:layout_constraintEnd_toStartOf="@id/tv_tuesday"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_tuesday"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_week_days"
+                        android:gravity="center"
+                        android:text="@string/tuesday"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_monday"
+                        app:layout_constraintDimensionRatio="1"
+                        app:layout_constraintEnd_toStartOf="@id/tv_thursday"
+                        app:layout_constraintStart_toEndOf="@id/tv_monday"
+                        app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_thursday"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_week_days"
+                        android:gravity="center"
+                        android:text="@string/thursday"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_monday"
+                        app:layout_constraintDimensionRatio="1"
+                        app:layout_constraintEnd_toStartOf="@id/tv_wednesday"
+                        app:layout_constraintStart_toEndOf="@id/tv_tuesday"
+                        app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_wednesday"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_week_days"
+                        android:gravity="center"
+                        android:text="@string/wednesday"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_monday"
+                        app:layout_constraintDimensionRatio="1"
+                        app:layout_constraintEnd_toStartOf="@id/tv_friday"
+                        app:layout_constraintStart_toEndOf="@id/tv_thursday"
+                        app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_friday"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_week_days"
+                        android:gravity="center"
+                        android:text="@string/friday"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_monday"
+                        app:layout_constraintDimensionRatio="1"
+                        app:layout_constraintEnd_toStartOf="@id/tv_saturday"
+                        app:layout_constraintStart_toEndOf="@id/tv_wednesday"
+                        app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_saturday"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_week_days"
+                        android:gravity="center"
+                        android:text="@string/saturday"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_monday"
+                        app:layout_constraintDimensionRatio="1"
+                        app:layout_constraintEnd_toStartOf="@id/tv_sunday"
+                        app:layout_constraintStart_toEndOf="@id/tv_friday"
+                        app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_sunday"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_week_days"
+                        android:gravity="center"
+                        android:text="@string/sunday"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_monday"
+                        app:layout_constraintDimensionRatio="1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_saturday"
+                        app:layout_constraintTop_toTopOf="@id/tv_monday"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/cl_week_days">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="4dp"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Signalni pauza qilish"
+                        android:textSize="18sp"
+                        app:drawableEndCompat="@drawable/ic_add"
+                        app:drawableStartCompat="@drawable/ic_pause"
+                        app:drawableTint="@color/text_color_selector" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="4dp"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Standart (Home coming)"
+                        android:textSize="18sp"
+                        app:drawableStartCompat="@drawable/ic_notification"
+                        app:drawableTint="@color/text_color_selector" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="4dp"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="Tebranish"
+                        android:textSize="18sp"
+                        app:drawableEndCompat="@drawable/ic_check"
+                        app:drawableStartCompat="@drawable/ic_vibration" />
+
+                    <TextView
+                        android:id="@+id/tv_delete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="4dp"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp"
+                        android:text="O'chirish"
+                        android:textSize="18sp"
+                        app:drawableStartCompat="@drawable/ic_delete"
+                        app:drawableTint="@color/text_color_selector" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menu_alarm_clock">
+    <fragment
+        android:id="@+id/menu_alarm_clock"
+        android:name="com.example.budilnik.fragments.alarm_fragment.AlarmFragment"
+        android:label="AlarmFragment"
+        tools:layout="@layout/fragment_alarm">
+        <action
+            android:id="@+id/action_menu_alarm_clock_to_noteDialog"
+            app:destination="@id/noteDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu_world_clock"
+        android:name="com.example.budilnik.fragments.clock_fragment.ClockFragment"
+        android:label="ClockFragment"
+        tools:layout="@layout/fragment_clock"/>
+    <fragment
+        android:id="@+id/menu_timer"
+        android:name="com.example.budilnik.fragments.timer_fragment.TimerFragment"
+        android:label="TimerFragment"
+        tools:layout="@layout/fragment_timer"/>
+    <fragment
+        android:id="@+id/menu_sekundomer"
+        android:name="com.example.budilnik.fragments.secundomer_fragment.SecundomerFragment"
+        android:label="SecundomerFragment"
+        tools:layout="@layout/fragment_secundomer"/>
+    <fragment
+        android:id="@+id/menu_sleep"
+        android:name="com.example.budilnik.fragments.sleep_mode_fragment.SleepModeFragment"
+        android:label="SleepModeFragment"
+        tools:layout="@layout/fragment_sleep_mode"/>
+    <dialog
+        android:id="@+id/noteDialog"
+        android:name="com.example.budilnik.dialog.NoteDialog"
+        android:label="NoteDialog"
+        tools:layout="@layout/dialog_note">
+        <argument
+            android:name="tintText"
+            app:argType="string" />
+    </dialog>
+</navigation>

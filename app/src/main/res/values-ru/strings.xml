@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="signal">Будильник</string>
+    <string name="soat">Часы</string>
+    <string name="taymer">Таймер</string>
+    <string name="sekundomer">Секундомер</string>
+    <string name="uyqu_vaqti">Режим сна</string>
+    <string name="yorliq_kiritish">Довабить заметка</string>
+    <string name="monday">П</string>
+    <string name="tuesday">В</string>
+    <string name="thursday">C</string>
+    <string name="wednesday">Ч</string>
+    <string name="friday">П</string>
+    <string name="saturday">С</string>
+    <string name="sunday">В</string>
+    <string name="izoh">Заметка</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Отменить</string>
+</resources>
