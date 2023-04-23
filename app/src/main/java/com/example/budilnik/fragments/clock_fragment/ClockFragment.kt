@@ -23,8 +23,8 @@ class ClockFragment : Fragment(R.layout.fragment_clock) {
 
         adapter.submitList(fillList())
 
-        adapter.setOnSelectedClickListener {
-            adapter.removeItem(it)
+        adapter.setOnItemSelectedListener {worldClock ->
+            adapter.removeItem(worldClock)
         }
     }
 
@@ -33,31 +33,37 @@ class ClockFragment : Fragment(R.layout.fragment_clock) {
         super.onResume()
     }
 
+    private fun toSearchFragment(){
+        binding.btnAdd.setOnClickListener {
+
+        }
+    }
+
     private fun fillList(): MutableList<WorldClock> {
         val list = mutableListOf<WorldClock>()
 
         list.add(WorldClock(
             0,
             "Astana",
-            "Astana/Asia"
+            "Asia/Astana"
         ))
 
         list.add(WorldClock(
             0,
             "Tashkent",
-            "Tashkent/Asia"
+            "Asia/Tashkent"
         ))
 
         list.add(WorldClock(
             0,
             "New York",
-            "New_York/America"
+            "America/New_York"
         ))
 
         list.add(WorldClock(
             0,
             "Seul",
-            "Seul/Asia"
+            "Asia/Seul"
         ))
 
         return list

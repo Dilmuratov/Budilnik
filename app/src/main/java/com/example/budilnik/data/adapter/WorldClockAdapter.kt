@@ -12,14 +12,24 @@ import java.util.*
 
 class WorldClockAdapter : ListAdapter<WorldClock, WorldClockAdapter.ViewHolder>(myDiffUtil) {
 
+    private var onItemSelectedListener: ((WorldClock) -> Unit)? = null
+
+    fun setOnItemSelectedListener(block: ((WorldClock) -> Unit)) {
+        onItemSelectedListener = block
+    }
+
     inner class ViewHolder(private var binding: ItemWorldClockBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind() {
+        fun bind(position: Int) {
             val worldClock = getItem(position)
-            binding.tvCountry.text = worldClock.timeZone
+            binding.tvCountry.text = worldClock.country
             binding.tvTime.text = getDate(worldClock.timeZone)
             binding.tvInterval.text = "${getInterval(worldClock.timeZone)} soat"
+
+            binding.root.setOnClickListener {
+                onItemSelectedListener?.invoke(worldClock)
+            }
         }
     }
 
@@ -30,7 +40,7 @@ class WorldClockAdapter : ListAdapter<WorldClock, WorldClockAdapter.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(position)
     }
 
     private fun getDate(timeZoneId: String): String {
@@ -68,8 +78,16 @@ class WorldClockAdapter : ListAdapter<WorldClock, WorldClockAdapter.ViewHolder>(
         override fun areItemsTheSame(oldItem: WorldClock, newItem: WorldClock) = oldItem == newItem
 
         override fun areContentsTheSame(oldItem: WorldClock, newItem: WorldClock) =
-            (oldItem.timeZone == newItem.timeZone) && (newItem.timeZone == oldItem.timeZone)
+            (oldItem.timeZone == newItem.timeZone) &&
+                    (newItem.timeZone == oldItem.timeZone) &&
+                    (oldItem.id == newItem.id)
 
+    }
+
+    fun removeItem(item: WorldClock) {
+        val currentList = currentList.toMutableList()
+        currentList.remove(item)
+        submitList(currentList)
     }
 
 }

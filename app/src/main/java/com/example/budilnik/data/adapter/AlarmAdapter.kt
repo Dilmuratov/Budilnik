@@ -4,17 +4,13 @@ import android.graphics.Typeface
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budilnik.data.models.Alarm
-import com.example.budilnik.databinding.DialogNoteBinding
 import com.example.budilnik.databinding.ItemAlarmBinding
 
-class AlarmAdapter : RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
-    var models = mutableListOf<Alarm>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class AlarmAdapter : ListAdapter<Alarm, AlarmAdapter.ViewHolder>(myDiffUtil) {
 
     private var onWeekDaysClickListener: ((Alarm) -> Unit)? = null
     private var onTimeClickListener: ((Alarm) -> Unit)? = null
@@ -39,8 +35,8 @@ class AlarmAdapter : RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemAlarmBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-            val alarm = models[adapterPosition]
+        fun bind(position: Int) {
+            val alarm = getItem(position)
             binding.tvTime.text = alarm.time
             binding.tvComment.text = alarm.comment
             binding.tvMonday.isSelected = alarm.isMondayActivated
@@ -152,10 +148,40 @@ class AlarmAdapter : RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(position)
     }
 
-    override fun getItemCount() = models.size
+    private object myDiffUtil: DiffUtil.ItemCallback<Alarm>() {
+        override fun areItemsTheSame(oldItem: Alarm, newItem: Alarm) = oldItem == newItem
+
+        override fun areContentsTheSame(oldItem: Alarm, newItem: Alarm): Boolean {
+            return oldItem.id == newItem.id &&
+                    oldItem.isActivate == newItem.isActivate &&
+                    oldItem.time == newItem.time &&
+                    oldItem.comment == newItem.comment &&
+                    oldItem.isMondayActivated == newItem.isMondayActivated &&
+                    oldItem.isTuesdayActivated == newItem.isTuesdayActivated &&
+                    oldItem.isThursdayAcivated == newItem.isThursdayAcivated &&
+                    oldItem.isWednesdayActivated == newItem.isWednesdayActivated &&
+                    oldItem.isFridayActivated == newItem.isFridayActivated &&
+                    oldItem.isSundayActivated == newItem.isSundayActivated &&
+                    oldItem.isSaturdayActivated == newItem.isSaturdayActivated
+        }
+    }
+
+    fun removeItem(item: Alarm) {
+        val currentList = currentList.toMutableList()
+        currentList.remove(item)
+        submitList(currentList.sortedBy { it.time }.toMutableList())
+    }
+
+    fun addItem(item: Alarm) {
+        val currentList = currentList.toMutableList()
+        currentList.add(item)
+        submitList(currentList.sortedBy { it.time }.toMutableList())
+    }
+
+    fun getItemByPosition(position: Int) = getItem(position)
 
     private fun setDaysToTextView(alarm: Alarm): String {
         val resultList = mutableListOf<String>()

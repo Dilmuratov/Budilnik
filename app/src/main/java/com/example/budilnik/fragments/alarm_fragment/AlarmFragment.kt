@@ -4,13 +4,11 @@ import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budilnik.*
@@ -34,9 +32,7 @@ class AlarmFragment : Fragment(R.layout.fragment_alarm) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAlarmBinding.bind(view)
 
-        binding.recyclerView.adapter = adapter
-
-        dao = AlarmDataBase.getInstance((requireActivity() as MainActivity)).getAlarmDao()
+        initVariables()
 
         setAlarm()
 
@@ -53,7 +49,7 @@ class AlarmFragment : Fragment(R.layout.fragment_alarm) {
                     lifecycleScope.launchWhenResumed {
                         alarm.comment = str
                         dao.updateAlarm(alarm)
-                        adapter.models = dao.getListOfAlarms().toMutableList().sortedBy { it.time }.toMutableList()
+                        adapter.submitList(dao.getListOfAlarms().toMutableList().sortedBy { it.time }.toMutableList())
                     }
                 }
                 dialog.dismiss()
@@ -61,11 +57,13 @@ class AlarmFragment : Fragment(R.layout.fragment_alarm) {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    fun initVariables() {
+        binding.recyclerView.adapter = adapter
+
+        dao = AlarmDataBase.getInstance((requireActivity() as MainActivity)).getAlarmDao()
+
         lifecycleScope.launchWhenResumed {
-            adapter.models =
-                dao.getListOfAlarms().toMutableList().sortedBy { it.time }.toMutableList()
+            adapter.submitList(dao.getListOfAlarms().toMutableList().sortedBy { it.time }.toMutableList())
         }
     }
 
@@ -80,16 +78,20 @@ class AlarmFragment : Fragment(R.layout.fragment_alarm) {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                val alarm: Alarm = adapter.models[position]
+                val alarm: Alarm? = adapter.getItemByPosition(position)
 
                 Toast.makeText((requireActivity() as MainActivity), "Deleted", Toast.LENGTH_SHORT)
                     .show()
 
                 lifecycleScope.launchWhenResumed {
-                    dao.deleteAlarm(alarm)
+                    if (alarm != null) {
+                        dao.deleteAlarm(alarm)
+                    }
+                }
+                if (alarm != null) {
+                    adapter.removeItem(alarm)
                 }
 
-                adapter.models.removeAt(position)
                 adapter.notifyItemRemoved(position)
 
                 Snackbar.make(
@@ -99,12 +101,14 @@ class AlarmFragment : Fragment(R.layout.fragment_alarm) {
                 ).apply {
                     setAction("Undo") {
                         lifecycleScope.launchWhenResumed {
-                            dao.addAlarm(alarm)
+                            if (alarm != null) {
+                                dao.addAlarm(alarm)
+                            }
                         }
-                        adapter.models.add(position, alarm)
+                        if (alarm != null) {
+                            adapter.addItem(alarm)
+                        }
                         adapter.notifyItemInserted(position)
-
-                        binding.recyclerView.adapter = adapter
 
                         binding.recyclerView.scrollToPosition(position)
                     }
@@ -118,11 +122,11 @@ class AlarmFragment : Fragment(R.layout.fragment_alarm) {
         }
 
         adapter.setOnDeleteClickListener { alarm ->
+
             lifecycleScope.launchWhenResumed {
                 dao.deleteAlarm(alarm)
-                adapter.models =
-                    dao.getListOfAlarms().toMutableList().sortedBy { it.time }.toMutableList()
             }
+            adapter.removeItem(alarm)
         }
     }
 
@@ -139,9 +143,8 @@ class AlarmFragment : Fragment(R.layout.fragment_alarm) {
                     val alarm = Alarm(0, time, isActivate = true, isMondayActivated = true, comment = "Yorliq kiritish")
                     lifecycleScope.launchWhenResumed {
                         dao.addAlarm(alarm)
-                        adapter.models = dao.getListOfAlarms().toMutableList().sortedBy { it.time }
-                            .toMutableList()
                     }
+                    adapter.addItem(alarm)
                 }
             TimePickerDialog(
                 requireActivity(),
@@ -158,8 +161,7 @@ class AlarmFragment : Fragment(R.layout.fragment_alarm) {
         adapter.setOnWeekDaysClickListener { alarm ->
             lifecycleScope.launchWhenResumed {
                 dao.updateAlarm(alarm)
-                adapter.models =
-                    dao.getListOfAlarms().toMutableList().sortedBy { it.time }.toMutableList()
+                adapter.submitList(dao.getListOfAlarms().toMutableList().sortedBy { it.time }.toMutableList())
             }
         }
 
@@ -173,8 +175,7 @@ class AlarmFragment : Fragment(R.layout.fragment_alarm) {
                     alarm.time = SimpleDateFormat("HH:mm").format(cal.time)
                     lifecycleScope.launchWhenResumed {
                         dao.updateAlarm(alarm)
-                        adapter.models = dao.getListOfAlarms().toMutableList().sortedBy { it.time }
-                            .toMutableList()
+                        adapter.submitList(dao.getListOfAlarms().toMutableList().sortedBy { it.time }.toMutableList())
                     }
                 }
             TimePickerDialog(
