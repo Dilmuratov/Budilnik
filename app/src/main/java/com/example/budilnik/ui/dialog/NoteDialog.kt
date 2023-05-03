@@ -1,4 +1,4 @@
-package com.example.budilnik.dialog
+package com.example.budilnik.ui.dialog
 
 import android.annotation.SuppressLint
 import android.graphics.Color

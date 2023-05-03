@@ -1,10 +1,11 @@
-package com.example.budilnik
+package com.example.budilnik.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.budilnik.R
 import com.example.budilnik.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

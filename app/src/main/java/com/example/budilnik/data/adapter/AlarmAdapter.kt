@@ -16,6 +16,7 @@ class AlarmAdapter : ListAdapter<Alarm, AlarmAdapter.ViewHolder>(myDiffUtil) {
     private var onTimeClickListener: ((Alarm) -> Unit)? = null
     private var onDeleteClickListener: ((Alarm) -> Unit)? = null
     private var onCommentClickListener: ((ItemAlarmBinding, Alarm) -> Unit)? = null
+    private var onVibrateClickListener: ((Alarm) -> Unit)? = null
 
     fun setOnWeekDaysClickListener(block: (Alarm) -> Unit) {
         onWeekDaysClickListener = block
@@ -31,6 +32,10 @@ class AlarmAdapter : ListAdapter<Alarm, AlarmAdapter.ViewHolder>(myDiffUtil) {
 
     fun setOnCommentClickListener(block: (ItemAlarmBinding, Alarm) -> Unit) {
         onCommentClickListener = block
+    }
+
+    fun setOnVibrateClickListener(block: (Alarm) -> Unit) {
+        onVibrateClickListener = block
     }
 
     inner class ViewHolder(private val binding: ItemAlarmBinding) :
@@ -49,22 +54,6 @@ class AlarmAdapter : ListAdapter<Alarm, AlarmAdapter.ViewHolder>(myDiffUtil) {
             binding.switchOnOff.isChecked = alarm.isActivate
 
             binding.tvDays.text = setDaysToTextView(alarm)
-            if (alarm.isActivate) {
-                binding.tvTime.setTypeface(null, Typeface.BOLD)
-            } else binding.tvTime.setTypeface(null, Typeface.NORMAL)
-
-            if (alarm.isMondayActivated ||
-                alarm.isTuesdayActivated ||
-                alarm.isThursdayAcivated ||
-                alarm.isWednesdayActivated ||
-                alarm.isFridayActivated ||
-                alarm.isSaturdayActivated ||
-                alarm.isSundayActivated
-            ) {
-                binding.switchOnOff.isChecked = true
-            } else if (setDaysToTextView(alarm).isEmpty()) {
-                binding.switchOnOff.isChecked = false
-            }
 
             binding.root.setOnClickListener {
                 binding.expandableLayout1.toggle()
@@ -75,7 +64,11 @@ class AlarmAdapter : ListAdapter<Alarm, AlarmAdapter.ViewHolder>(myDiffUtil) {
             binding.switchOnOff.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (binding.switchOnOff.isChecked) {
                     binding.tvTime.setTypeface(null, Typeface.BOLD)
-                } else binding.tvTime.setTypeface(null, Typeface.NORMAL)
+                    alarm.isActivate = true
+                } else{
+                    binding.tvTime.setTypeface(null, Typeface.NORMAL)
+                    alarm.isActivate = false
+                }
             }
 
             binding.tvMonday.setOnClickListener {
@@ -138,6 +131,10 @@ class AlarmAdapter : ListAdapter<Alarm, AlarmAdapter.ViewHolder>(myDiffUtil) {
             binding.tvComment.setOnClickListener {
                 onCommentClickListener?.invoke(binding, alarm)
                 Log.d("SSSS", alarm.comment + "A")
+            }
+
+            binding.tvVibrate.setOnClickListener {
+                onVibrateClickListener?.invoke(alarm)
             }
         }
     }

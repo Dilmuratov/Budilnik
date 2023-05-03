@@ -8,7 +8,7 @@ data class Alarm(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     var time: String, //22:45
-    val isActivate: Boolean, //switch
+    var isActivate: Boolean, //switch
     var isMondayActivated: Boolean = false,
     var isTuesdayActivated: Boolean = false,
     var isWednesdayActivated: Boolean = false,

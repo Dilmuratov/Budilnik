@@ -1,4 +1,4 @@
-package com.example.budilnik.fragments.clock_fragment
+package com.example.budilnik.ui.fragments.clock_fragment
 
 import android.os.Build
 import android.os.Bundle

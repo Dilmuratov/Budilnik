@@ -1,4 +1,4 @@
-package com.example.budilnik.fragments.secundomer_fragment
+package com.example.budilnik.ui.fragments.secundomer_fragment
 
 import android.os.Bundle
 import android.view.View

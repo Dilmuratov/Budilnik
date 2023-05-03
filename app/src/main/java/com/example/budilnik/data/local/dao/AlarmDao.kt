@@ -1,4 +1,4 @@
-package com.example.budilnik.data.dao
+package com.example.budilnik.data.local.dao
 
 import androidx.room.*
 import com.example.budilnik.data.models.Alarm

@@ -1,4 +1,4 @@
-package com.example.budilnik.fragments.timer_fragment
+package com.example.budilnik.ui.fragments.timer_fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle

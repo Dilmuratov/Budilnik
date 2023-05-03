@@ -1,4 +1,4 @@
-package com.example.budilnik.fragments.sleep_mode_fragment
+package com.example.budilnik.ui.fragments.sleep_mode_fragment
 
 import android.os.Bundle
 import android.view.View

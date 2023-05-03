@@ -1,4 +1,4 @@
-package com.example.budilnik.fragments.search_fragment
+package com.example.budilnik.ui.fragments.search_fragment
 
 import android.os.Bundle
 import android.view.View

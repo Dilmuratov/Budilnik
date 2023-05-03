@@ -242,6 +242,7 @@
                         app:drawableTint="@color/text_color_selector" />
 
                     <TextView
+                        android:id="@+id/tv_vibrate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
